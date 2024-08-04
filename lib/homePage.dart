@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage>
 
   void initState() {
     super.initState();
-    tabController = TabController(length: 9, vsync: this);
+    tabController = TabController(length: 10, vsync: this);
 
     getNews();
   }
@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
         backgroundColor: Color.fromRGBO(241, 239, 231, 01.0),
         appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
           actions: [
             Padding(
               padding: const EdgeInsets.only(top: 15),
@@ -106,25 +107,18 @@ class _HomePageState extends State<HomePage>
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(20),
               height: MediaQuery.of(context).size.height,
               width: double.infinity,
               child: Column(
                 children: [
                   Container(
-                    height: 200,
-                    width: 110,
-                    child: Text(
-                      "hahh",
-                      style: TextStyle(
-                        fontFamily: 'Saira Extra Condensed',
-                        fontSize: 25,
-                        color: Colors.white,
-                      ),
-                    ),
+                    width: sWidth,
+                    color: Colors.green,
+                    height: 250,
                   ),
-                  SizedBox(
-                    height: 50,
+                  Divider(
+                    endIndent: 35,
+                    indent: 35,
                   ),
                   TabBar(
                     isScrollable: true,
@@ -137,33 +131,35 @@ class _HomePageState extends State<HomePage>
                     ),
                     tabs: [
                       Tab(
-                        child: Text(
-                          "All",
-                        ),
+                        text: "Sports",
+                        icon: Icon(Icons.sports_volleyball),
                       ),
                       Tab(
-                        text: "Rubi Gusai",
+                        text: "National",
                       ),
                       Tab(
-                        text: "Ana Patel",
+                        text: "Business",
                       ),
                       Tab(
-                        text: "Shubham Pandya",
+                        text: "World",
                       ),
                       Tab(
-                        text: "Rubi Gusai",
+                        text: "Technology",
                       ),
                       Tab(
-                        text: "Ana Patel",
+                        text: "Automobile",
                       ),
                       Tab(
-                        text: "Shubham Pandya",
+                        text: "Entertainment",
                       ),
                       Tab(
-                        text: "Rubi Gusai",
+                        text: "Startup",
                       ),
                       Tab(
-                        text: "Ana Patel",
+                        text: "Science",
+                      ),
+                      Tab(
+                        text: "Politics",
                       ),
                     ],
                     labelColor: Colors.black,
@@ -173,11 +169,15 @@ class _HomePageState extends State<HomePage>
                     controller: tabController,
                     children: [
                       Container(
-                        child: allNews(),
-                        color: Colors.red,
-                      ),
-                      Container(
                         color: Colors.amber,
+                        child: ListView.builder(
+                            itemCount: 100,
+                            itemBuilder: (context, i) {
+                              return ListTile(
+                                leading: Icon(Icons.IconDatacreate),
+                                title: Text(i.toString()),
+                              );
+                            }),
                       ),
                       Container(
                         color: Colors.blue,
@@ -196,6 +196,12 @@ class _HomePageState extends State<HomePage>
                       ),
                       Container(
                         color: Colors.amber,
+                      ),
+                      Container(
+                        color: Colors.blue,
+                      ),
+                      Container(
+                        color: Colors.blue,
                       ),
                       Container(
                         color: Colors.blue,
