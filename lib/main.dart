@@ -6,7 +6,8 @@ import 'dart:convert';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(colorScheme: ColorScheme.light(), useMaterial3: true),
+    theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey
+    ), useMaterial3: true),
     home: HomePage(),
   ));
 }
