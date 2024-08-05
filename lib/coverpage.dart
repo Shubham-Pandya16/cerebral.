@@ -21,7 +21,7 @@ class _CoverScreenState extends State<CoverScreen> {
   }
 
   starttime() async {
-    var duration = Duration(seconds: 2);
+    var duration = Duration(seconds: 40);
     return Timer(duration, nextScreen);
   }
 
@@ -38,16 +38,26 @@ class _CoverScreenState extends State<CoverScreen> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromRGBO(228, 226, 221, 01.0),
         body: Center(
-          child: Container(
-              height: sHeight,
-              width: sWidth,
-              color: Color.fromRGBO(228, 226, 221, 01.0),
-              child: Image.asset("assets/images/cerebral_wb.png")
-      
-              // color: Colors.black,
-              // child: Image.asset("assets/images/cerebral_bw.png")
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/images/cerebral_wb.png"),
+                ],
               ),
+              Container(
+                padding: EdgeInsets.all(60),
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  "assets/images/since.png",
+                  height: 25,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

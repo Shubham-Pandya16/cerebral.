@@ -106,12 +106,12 @@ class _HomePageState extends State<HomePage>
               print("Cerebral Logo Tapped");
             },
             child: Image.asset(
-              "assets/images/cerebral_wb.png",
+              "assets/images/cerebral_logo.png",
               width: 150,
               fit: BoxFit.fitWidth,
             ),
           ),
-          toolbarHeight: 55,
+          toolbarHeight: 65,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 18.0, top: 2),
