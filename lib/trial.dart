@@ -1,3 +1,44 @@
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     // Get the current month name
+//     String currentMonth = DateFormat.MMMM().format(DateTime.now());
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Current Month Example'),
+//       ),
+//       body: Center(
+//         child: Text(
+//           'Current Month: $currentMonth',
+//           style: TextStyle(fontSize: 24),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 // ignore_for_file: non_constant_identifier_names, file_names, unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, avoid_print
 
 import 'package:flutter/material.dart';
@@ -11,59 +52,17 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   bool isLoading = true;
 
   late TabController tabController;
 
-  List<dynamic> all_news = [];
-  List<dynamic> automobile_news = [];
-  List<dynamic> business_news = [];
-  List<dynamic> entertainment_news = [];
-  List<dynamic> national_news = [];
-  List<dynamic> politics_news = [];
-  List<dynamic> science_news = [];
   List<dynamic> sports_news = [];
-  List<dynamic> startup_news = [];
-  List<dynamic> technology_news = [];
-  List<dynamic> world_news = [];
 
   void getNews() async {
-    http.Response all_response = await http
-        .get(Uri.parse("https://inshortsapi.vercel.app/news?category=all"));
-    http.Response automobile_response = await http.get(
-        Uri.parse("https://inshortsapi.vercel.app/news?category=automobile"));
-    http.Response business_response = await http.get(
-        Uri.parse("https://inshortsapi.vercel.app/news?category=business"));
-    http.Response entertainment_response = await http.get(Uri.parse(
-        "https://inshortsapi.vercel.app/news?category=entertainment"));
-    http.Response national_response = await http.get(
-        Uri.parse("https://inshortsapi.vercel.app/news?category=national"));
-    http.Response politics_response = await http.get(
-        Uri.parse("https://inshortsapi.vercel.app/news?category=politics"));
-    http.Response science_response = await http
-        .get(Uri.parse("https://inshortsapi.vercel.app/news?category=science"));
-    http.Response sports_response = await http
-        .get(Uri.parse("https://inshortsapi.vercel.app/news?category=sports"));
-    http.Response startup_response = await http
-        .get(Uri.parse("https://inshortsapi.vercel.app/news?category=startup"));
-    http.Response technology_response = await http.get(
-        Uri.parse("https://inshortsapi.vercel.app/news?category=technology"));
-    http.Response world_response = await http
-        .get(Uri.parse("https://inshortsapi.vercel.app/news?category=world"));
+    http.Response sports_response = await http.get(Uri.parse("https://inshortsapi.vercel.app/news?category=sports"));
     setState(() {
-      all_news = json.decode(all_response.body)["data"];
-      automobile_news = json.decode(automobile_response.body)["data"];
-      business_news = json.decode(business_response.body)["data"];
-      entertainment_news = json.decode(entertainment_response.body)["data"];
-      national_news = json.decode(national_response.body)["data"];
-      politics_news = json.decode(politics_response.body)["data"];
-      science_news = json.decode(science_response.body)["data"];
       sports_news = json.decode(sports_response.body)["data"];
-      startup_news = json.decode(startup_response.body)["data"];
-      technology_news = json.decode(technology_response.body)["data"];
-      world_news = json.decode(world_response.body)["data"];
       isLoading = false;
     });
   }
@@ -72,7 +71,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     tabController = TabController(length: 10, vsync: this);
-
     getNews();
   }
 
@@ -82,67 +80,47 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  // Gothic text font to be used for news headlines
-  // Roboto for articles
-  // showDialog for displaying ful article
-
   @override
   Widget build(BuildContext context) {
     var sHeight = MediaQuery.of(context).size.height;
     var sWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Color.fromRGBO(241, 239, 231, 01.0),
-          appBar: AppBar(
-            backgroundColor: Color.fromRGBO(241, 239, 231, 01.0),
-            surfaceTintColor: Colors.transparent,
-            title: GestureDetector(
-              onTap: () {
-                print("Cerebral Logo Tapped");
-              },
-              child: Image.asset(
-                "assets/images/cerebral_logo.png",
-                width: 150,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: IconButton(
-                    onPressed: () {
-                      print("more in Appbar");
-                    },
-                    icon: Icon(Icons.more_vert)),
-              ),
-            ],
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(241, 239, 231, 1.0),
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(241, 239, 231, 1.0),
+        surfaceTintColor: Colors.transparent,
+        title: GestureDetector(
+          onTap: () {
+            print("Cerebral Logo Tapped");
+          },
+          child: Image.asset(
+            "assets/images/cerebral_logo.png",
+            width: 150,
+            fit: BoxFit.fitWidth,
           ),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Container(
-                height: sHeight,
-                width: sWidth,
-                child: Column(
-                  children: [
-                    Container(
-                      width: sWidth * 0.95,
-                      height: 250,
-                      color: Colors.red,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: all_news.length, itemBuilder: (context, i) {
-                            return Container(
-                              height: 100, width: sWidth / 2,
-                              child: Text(all_news[i]['title']),);
-                          }),
-                    ),
-                    tabBar(),
-                    Expanded(child: tabNews())
-                  ],
-                ),
-              ),
+        ),
+        actions: [
+          Container(
+            height: 45,
+            width: 20,
+            color: Colors.amber,
+          )
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              width: sWidth,
+              height: 250,
+              color: Colors.grey[200],
+              // Zomato like Card View for main headlines along with stack
             ),
-          )),
+            tabBar(),
+            Expanded(child: tabNews()),
+          ],
+        ),
+      ),
     );
   }
 
@@ -154,8 +132,8 @@ class _HomePageState extends State<HomePage>
           child: isLoading
               ? Center(
                   child: SizedBox(
-                    height: 100,
-                    width: 100,
+                    width: 50.0,
+                    height: 50.0,
                     child: CircularProgressIndicator(
                       color: Colors.grey,
                       strokeWidth: 1,
@@ -188,9 +166,7 @@ class _HomePageState extends State<HomePage>
                                     maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
+                                  SizedBox(height: 8),
                                   Row(
                                     children: [
                                       Text(
@@ -204,9 +180,7 @@ class _HomePageState extends State<HomePage>
                                         color: Colors.grey.shade600,
                                         size: 18,
                                       ),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
+                                      SizedBox(width: 3),
                                       Text(
                                         sports_news[i]["author"],
                                         style: TextStyle(
@@ -241,33 +215,15 @@ class _HomePageState extends State<HomePage>
                   },
                 ),
         ),
-        Container(
-          color: Colors.blue,
-        ),
-        Container(
-          color: Colors.red,
-        ),
-        Container(
-          color: Colors.amber,
-        ),
-        Container(
-          color: Colors.blue,
-        ),
-        Container(
-          color: Colors.red,
-        ),
-        Container(
-          color: Colors.amber,
-        ),
-        Container(
-          color: Colors.blue,
-        ),
-        Container(
-          color: Colors.redAccent,
-        ),
-        Container(
-          color: Colors.amber,
-        ),
+        Container(color: Colors.blue),
+        Container(color: Colors.red),
+        Container(color: Colors.amber),
+        Container(color: Colors.blue),
+        Container(color: Colors.red),
+        Container(color: Colors.amber),
+        Container(color: Colors.blue),
+        Container(color: Colors.redAccent),
+        Container(color: Colors.amber),
       ],
     );
   }
@@ -327,3 +283,4 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
+

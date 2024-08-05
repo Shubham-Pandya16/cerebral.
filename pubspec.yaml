@@ -1,5 +1,5 @@
-name: live_news_app
-description: "A new Flutter project."
+name: cerebral
+description: "A Live News Application."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -30,7 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  lottie: ^2.3.2
+  introduction_screen: ^3.1.12
+  fluttertoast: 8.1.4
   http: ^1.2.2
+  intl: ^0.17.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -66,6 +70,14 @@ flutter:
     - family: Saira Extra Condensed
       fonts:
         - asset: assets/fonts/Saira_Extra_Condensed/SairaExtraCondensed-Black.ttf
+
+    - family: Gupter
+      fonts:
+        - asset: assets/fonts/Gupter/Gupter-Medium.ttf
+
+    - family: IBM Plex Serif
+      fonts:
+        - asset: assets/fonts/IBM_Plex_Serif/IBMPlexSerif-SemiBold.ttf
 
   #   - family: Trajan Pro
   #     fonts:
