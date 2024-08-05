@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +11,11 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+String currentMonth = DateFormat.MMMM().format(DateTime.now());
+String currentYear = DateFormat.y().format(DateTime.now());
+String currentDate = DateFormat.d().format(DateTime.now());
+String currentDay = DateFormat.EEEE().format(DateTime.now());
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
@@ -84,66 +90,147 @@ class _HomePageState extends State<HomePage>
 
   // Gothic text font to be used for news headlines
   // Roboto for articles
-  // showDialog for displaying ful article
+  // showDialog for displaying full article
 
   @override
   Widget build(BuildContext context) {
     var sHeight = MediaQuery.of(context).size.height;
     var sWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Color.fromRGBO(241, 239, 231, 01.0),
-          appBar: AppBar(
-            backgroundColor: Color.fromRGBO(241, 239, 231, 01.0),
-            surfaceTintColor: Colors.transparent,
-            title: GestureDetector(
-              onTap: () {
-                print("Cerebral Logo Tapped");
-              },
-              child: Image.asset(
-                "assets/images/cerebral_logo.png",
-                width: 150,
-                fit: BoxFit.fitWidth,
-              ),
+    return Scaffold(
+        backgroundColor: Color.fromRGBO(228, 226, 221, 01.0),
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(228, 226, 221, 01.0),
+          surfaceTintColor: Colors.transparent,
+          title: GestureDetector(
+            onTap: () {
+              print("Cerebral Logo Tapped");
+            },
+            child: Image.asset(
+              "assets/images/cerebral_wb.png",
+              width: 150,
+              fit: BoxFit.fitWidth,
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: IconButton(
-                    onPressed: () {
-                      print("more in Appbar");
-                    },
-                    icon: Icon(Icons.more_vert)),
-              ),
-            ],
           ),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Container(
-                height: sHeight,
-                width: sWidth,
-                child: Column(
-                  children: [
-                    Container(
-                      width: sWidth * 0.95,
-                      height: 250,
-                      color: Colors.red,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: all_news.length, itemBuilder: (context, i) {
-                            return Container(
-                              height: 100, width: sWidth / 2,
-                              child: Text(all_news[i]['title']),);
-                          }),
-                    ),
-                    tabBar(),
-                    Expanded(child: tabNews())
-                  ],
-                ),
+          toolbarHeight: 55,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 18.0, top: 2),
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        currentDay.toUpperCase(),
+                        style: TextStyle(
+                          height: 1,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Gupter',
+                        ),
+                      ),
+                      Text(
+                        currentMonth,
+                        style: TextStyle(
+                            fontSize: 16, height: 0.5, fontFamily: 'Gupter'),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    currentDate,
+                    style: TextStyle(
+                        fontSize: 35,
+                        fontFamily: 'Gupter',
+                        fontWeight: FontWeight.w100),
+                  )
+                ],
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
               ),
             ),
-          )),
-    );
+          ],
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              height: sHeight,
+              width: sWidth,
+              child: Column(
+                children: [
+                  Container(
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(25)),
+                    width: sWidth,
+                    height: 250,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: all_news.length,
+                      itemBuilder: (context, i) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 15, top: 10, bottom: 10),
+                          child: Stack(
+                            children: [
+                              Container(
+                                child: Center(
+                                    child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    all_news[i]["imageUrl"],
+                                    height: double.infinity,
+                                    width: sWidth * 0.9,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                height: double.infinity,
+                                width: sWidth * 0.9,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        Colors.black.withOpacity(0.99),
+                                        Colors.black.withOpacity(0.65),
+                                        Colors.black.withOpacity(0.25),
+                                        Colors.white.withOpacity(0.11)
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(15),
+                                alignment: Alignment.bottomLeft,
+                                height: double.infinity,
+                                width: sWidth * 0.9,
+                                child: Text(
+                                  all_news[i]['title'].toUpperCase(),
+                                  style: TextStyle(
+                                      fontFamily: 'Saira Extra Condensed',
+                                      letterSpacing: 0.5,
+                                      fontSize: 23,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  tabBar(),
+                  Expanded(child: tabNews())
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   Widget tabNews() {
@@ -151,6 +238,7 @@ class _HomePageState extends State<HomePage>
       controller: tabController,
       children: [
         Container(
+          // Sports News
           child: isLoading
               ? Center(
                   child: SizedBox(
@@ -242,30 +330,127 @@ class _HomePageState extends State<HomePage>
                 ),
         ),
         Container(
-          color: Colors.blue,
+          // National News
+          child: isLoading
+              ? Center(
+                  child: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: CircularProgressIndicator(
+                      color: Colors.grey,
+                      strokeWidth: 1,
+                    ),
+                  ),
+                )
+              : ListView.separated(
+                  itemCount: national_news.length,
+                  itemBuilder: (context, i) {
+                    return Card(
+                      color: Colors.transparent,
+                      elevation: 0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    national_news[i]["title"],
+                                    style: TextStyle(
+                                      fontFamily: 'IBM Plex Serif',
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 0.3,
+                                      fontSize: 15,
+                                    ),
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "by ",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey.shade600),
+                                      ),
+                                      Icon(
+                                        Icons.account_circle_sharp,
+                                        color: Colors.grey.shade600,
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        national_news[i]["author"],
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey.shade600),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                national_news[i]["imageUrl"],
+                                width: 90,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider(
+                      endIndent: 25,
+                      indent: 25,
+                    );
+                  },
+                ),
         ),
         Container(
+          // Business News
           color: Colors.red,
         ),
         Container(
+          // World News
           color: Colors.amber,
         ),
         Container(
+          // Technology News
           color: Colors.blue,
         ),
         Container(
+          // Automobile News
           color: Colors.red,
         ),
         Container(
+          // Entertainment News
           color: Colors.amber,
         ),
         Container(
+          // Startup News
           color: Colors.blue,
         ),
         Container(
+          // Science News
           color: Colors.redAccent,
         ),
         Container(
+          // Politics News
           color: Colors.amber,
         ),
       ],
@@ -278,9 +463,9 @@ class _HomePageState extends State<HomePage>
       controller: tabController,
       unselectedLabelColor: Colors.grey,
       labelStyle: TextStyle(
-        fontFamily: 'Saira Extra Condensed', // Use the custom font
-        fontSize: 25,
-      ),
+          fontFamily: 'Saira Extra Condensed', // Use the custom font
+          fontSize: 25,
+          fontWeight: FontWeight.w900),
       tabs: [
         Tab(
           text: "Sports",

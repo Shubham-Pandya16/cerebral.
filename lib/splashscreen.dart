@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cerebral/coverpage.dart';
 import 'package:cerebral/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   starttime() async {
-    var duration = Duration(seconds: 7);
+    var duration = Duration(seconds: 3);
     return Timer(duration, nextScreen);
   }
 
