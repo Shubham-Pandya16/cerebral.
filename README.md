@@ -1,6 +1,5 @@
-# live_news_app
-
-A new Flutter project.
+cerebral.
+A live news application
 
 ## Getting Started
 
