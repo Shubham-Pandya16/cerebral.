@@ -7,7 +7,7 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
+        colorScheme: ColorScheme.fromSeed(seedColor:Color.fromRGBO(228, 226, 221, 01.0)),
         useMaterial3: true),
     home: CoverScreen(),
   ));

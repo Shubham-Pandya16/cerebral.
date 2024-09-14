@@ -4,7 +4,6 @@ import 'package:cerebral/homePage.dart';
 import 'package:cerebral/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 class CoverScreen extends StatefulWidget {
   const CoverScreen({super.key});
 
@@ -21,7 +20,7 @@ class _CoverScreenState extends State<CoverScreen> {
   }
 
   starttime() async {
-    var duration = Duration(seconds: 40);
+    var duration = Duration(seconds: 2);
     return Timer(duration, nextScreen);
   }
 
@@ -49,11 +48,27 @@ class _CoverScreenState extends State<CoverScreen> {
                 ],
               ),
               Container(
-                padding: EdgeInsets.all(60),
+                height: sHeight,
+                width: sWidth,
                 alignment: Alignment.bottomCenter,
-                child: Image.asset(
-                  "assets/images/since.png",
-                  height: 25,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Image.asset(
+                      "assets/images/since.png",
+                      height: 25,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "  shubham :)",
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                  ],
                 ),
               )
             ],

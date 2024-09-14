@@ -35,14 +35,24 @@ dependencies:
   fluttertoast: 8.1.4
   http: ^1.2.2
   intl: ^0.17.0
+  flutter_launcher_icons: ^0.13.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  flutter_local_notifications: ^17.2.2
+  liquid_pull_to_refresh: ^3.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/cerebral_full.png"
+  adaptive_icon_background: "#ffffff"
+  min_sdk_android: 18 # android min sdk min:16, default 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -71,11 +81,17 @@ flutter:
       fonts:
         - asset: assets/fonts/Saira_Extra_Condensed/SairaExtraCondensed-Black.ttf
           weight: 900
-        - asset: assets/fonts/Saira_Extra_Condensed/SairaExtraCondensed-Black.ttf
-          weight: 800
+
         - asset: assets/fonts/Saira_Extra_Condensed/SairaExtraCondensed-SemiBold.ttf
+          weight: 800
+        - asset: assets\fonts\Saira_Extra_Condensed\SairaExtraCondensed-Bold.ttf
           weight: 700
 
+    - family: Archivo Black
+      fonts:
+        - asset: assets\fonts\Archivo_Black\ArchivoBlack-Regular.ttf
+        
+        
     - family: Gupter
       fonts:
         - asset: assets/fonts/Gupter/Gupter-Bold.ttf
@@ -91,6 +107,11 @@ flutter:
     - family: Okine_sans
       fonts:
         - asset: assets\fonts\Okine_sans\MADEOkineSansPERSONALUSE-Thin.otf
+
+    - family: Unique
+      fonts:
+        - asset: assets\fonts\unique\Unique.ttf
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
